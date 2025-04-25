@@ -61,19 +61,38 @@ def lcd_print(text):
 # Initialize I2C bus
 bus = smbus.SMBus(1)
 
-# Initialize LCD
+def get_greeting(hours):
+    """Return appropriate greeting based on time"""
+    if 5 <= hours < 12:
+        return "Good Morning!"
+    elif 12 <= hours < 17:
+        return "Good Afternoon!"
+    else:
+        return "Good Night!"
+
+def display_time_greeting(hours):
+    """Display appropriate greeting on LCD based on time"""
+    lcd_clear()
+    greeting = get_greeting(hours)
+    lcd_set_cursor(0, 0)
+    lcd_print(greeting)
+
+
+# Initialize LCD first
 lcd_init()
-
-# Example Usage
 lcd_clear()
-lcd_set_cursor(0, 0)  # Line 1, Position 0
-lcd_print("Number Of 2 Rupee Coins")
 
-lcd_set_cursor(1, 0)  # Line 2
-lcd_print("Number: " + str(20))
-
-lcd_set_cursor(2, 0)  # Line 3
-lcd_print("I2C 20x4 LCD")
-
-lcd_set_cursor(3, 0)  # Line 4
-lcd_print("Enjoy Coding!")
+# Main program
+while True:
+    try:
+        hours = int(input("Enter hour (0-23): "))
+        if 0 <= hours <= 23:
+            display_time_greeting(hours)
+        else:
+            print("Please enter a valid hour between 0 and 23")
+    except ValueError:
+        print("Please enter a valid number")
+    except KeyboardInterrupt:
+        lcd_clear()
+        print("\nProgram terminated")
+        break

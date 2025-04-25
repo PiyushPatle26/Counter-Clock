@@ -11,13 +11,13 @@ pca = PCA9685(i2c)
 pca.frequency = 50
 
 # Define servo channels
-SERVO_CHANNELS = [0, 1, 2, 3]  # Modify based on your setup
+SERVO_CHANNELS = [0, 1, 2, 3, 4, 5, 6]  # Modified to support 7 servos
 
 # Function to set servo angle
 def set_servo_angle(servo, angle):
     """
     Set the angle of a specific servo.
-    :param servo: Servo index (0 to 3)
+    :param servo: Servo index (0 to 6)
     :param angle: Desired angle (0 to 180)
     """
     if 0 <= servo < len(SERVO_CHANNELS) and 0 <= angle <= 180:
