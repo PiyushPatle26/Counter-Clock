@@ -1,0 +1,8 @@
+[0/1] Re-running CMake...
+-- Building ESP-IDF components for target esp32
+-- Found Git: /usr/bin/git (found version "2.34.1") 
+-- Configuring incomplete, errors occurred!
+See also "/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/CMakeFiles/CMakeOutput.log".
+See also "/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/CMakeFiles/CMakeError.log".
+FAILED: build.ninja 
+/usr/bin/cmake --regenerate-during-build -S/home/lord-daniel/Code/Counter-Clock/ds1307_test -B/home/lord-daniel/Code/Counter-Clock/ds1307_test/build
