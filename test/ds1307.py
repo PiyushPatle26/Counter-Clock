@@ -57,6 +57,10 @@ class DS1307:
 def continuous_time_display():
     """Continuously read and display time from DS1307"""
     rtc = DS1307()
+
+    # Sync RTC time with Raspberry Pi system time once
+    print("Setting RTC to system time...")
+    rtc.set_time(datetime.now())
     
     try:
         while True:

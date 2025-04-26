@@ -1,0 +1,544 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7128
+load:0x40078000,len:15716
+load:0x40080400,len:4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (29) boot: ESP-IDF v5.1.6-354-gfb2a72fd53 2nd stage bootloader[0m
+[0;32mI (29) boot: compile time Apr 26 2025 02:37:50[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v3.1[0m
+[0;32mI (39) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (43) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (52) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (61) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (76) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (91) boot: End of partition table[0m
+[0;32mI (95) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0ab18h ( 43800) map[0m
+[0;32mI (120) esp_image: segment 1: paddr=0001ab40 vaddr=3ffb0000 size=02130h (  8496) load[0m
+[0;32mI (123) esp_image: segment 2: paddr=0001cc78 vaddr=40080000 size=033a0h ( 13216) load[0m
+[0;32mI (131) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=164b8h ( 91320) map[0m
+[0;32mI (167) esp_image: segment 4: paddr=000364e0 vaddr=400833a0 size=0a17ch ( 41340) load[0m
+[0;32mI (191) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (191) boot: Disabling RNG early entropy source...[0m
+[0;32mI (203) cpu_start: Multicore app[0m
+[0;32mI (204) cpu_start: Pro cpu up.[0m
+[0;32mI (204) cpu_start: Starting app cpu, entry point is 0x4008121c[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (221) cpu_start: Pro cpu start user code[0m
+[0;32mI (221) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (221) cpu_start: Application information:[0m
+[0;32mI (226) cpu_start: Project name:     7-segment-clock[0m
+[0;32mI (231) cpu_start: App version:      4ae73e0-dirty[0m
+[0;32mI (237) cpu_start: Compile time:     Apr 26 2025 02:37:32[0m
+[0;32mI (243) cpu_start: ELF file SHA256:  51a45cc5d2709bcb...[0m
+[0;32mI (249) cpu_start: ESP-IDF:          v5.1.6-354-gfb2a72fd53[0m
+[0;32mI (255) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (260) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (265) cpu_start: Chip rev:         v3.1[0m
+[0;32mI (270) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (277) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (283) heap_init: At 3FFB29D0 len 0002D630 (181 KiB): DRAM[0m
+[0;32mI (289) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (295) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (302) heap_init: At 4008D51C len 00012AE4 (74 KiB): IRAM[0m
+[0;32mI (309) spi_flash: detected chip: generic[0m
+[0;32mI (313) spi_flash: flash io: dio[0m
+[0;33mW (316) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (330) app_start: Starting scheduler on CPU0[0m
+[0;32mI (335) app_start: Starting scheduler on CPU1[0m
+[0;32mI (335) main_task: Started on CPU0[0m
+[0;32mI (345) main_task: Calling app_main()[0m
+[0;32mI (345) PCA9685: Initializing PCA9685 at address 0x40[0m
+[0;32mI (355) PCA9685: PCA9685 initialized[0m
+[0;32mI (355) PCA9685: Set PWM frequency to 50.03 Hz (prescale=121)[0m
+PCA9685 initialized. Starting servo control...
+Moving to 0 degrees
+[0;32mI (365) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (2375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (4375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (6375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (8375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (10375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (12375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (14375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (16375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (18375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (20375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (22375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (24375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (26375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (28375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (30375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (32375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (34375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (36375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (38375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (40375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (42375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (44375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (46375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (48375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (50375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (52375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (54375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (56375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (58375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (60375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (62375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (64375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (66375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (68375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (70375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (72375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (74375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (76375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (78375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (80375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (82375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (84375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (86375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (88375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (90375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (92375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (94375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (96375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (98375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (100375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (102375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (104375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (106375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (108375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (110375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (112375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (114375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (116375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (118375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (120375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (122375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (124375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (126375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (128375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (130375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (132375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (134375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (136375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (138375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (140375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (142375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (144375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (146375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (148375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (150375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (152375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (154375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (156375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (158375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (160375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (162375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (164375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (166375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (168375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (170375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (172375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (174375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (176375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (178375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (180375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (182375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (184375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (186375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (188375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (190375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (192375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (194375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (196375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (198375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (200375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (202375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (204375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (206375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (208375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (210375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (212375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (214375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (216375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (218375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (220375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (222375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (224375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (226375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (228375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (230375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (232375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (234375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (236375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (238375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (240375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (242375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (244375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (246375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (248375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (250375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (252375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (254375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (256375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (258375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (260375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (262375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (264375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (266375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (268375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (270375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (272375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (274375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (276375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (278375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (280375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (282375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (284375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (286375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (288375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (290375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (292375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (294375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (296375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (298375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (300375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (302375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (304375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (306375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (308375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (310375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (312375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (314375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (316375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (318375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (320375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (322375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (324375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (326375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (328375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (330375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (332375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (334375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (336375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (338375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (340375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (342375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (344375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (346375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (348375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (350375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (352375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (354375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (356375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (358375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (360375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (362375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (364375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (366375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (368375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (370375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (372375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (374375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (376375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (378375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (380375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (382375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (384375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (386375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (388375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (390375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (392375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (394375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (396375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (398375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (400375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (402375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (404375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (406375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (408375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (410375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (412375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (414375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (416375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (418375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (420375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (422375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (424375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (426375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (428375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (430375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (432375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (434375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (436375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (438375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (440375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (442375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (444375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (446375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (448375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (450375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (452375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (454375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (456375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (458375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (460375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (462375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (464375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (466375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (468375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (470375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (472375) PCA9685: Set channel 1 duty to 512[0m
+Moving to 0 degrees
+[0;32mI (474375) PCA9685: Set channel 1 duty to 102[0m
+Moving to 90 degrees
+[0;32mI (476375) PCA9685: Set channel 1 duty to 307[0m
+Moving to 180 degrees
+[0;32mI (478375) PCA9685: Set channel 1 duty to 512[0m
