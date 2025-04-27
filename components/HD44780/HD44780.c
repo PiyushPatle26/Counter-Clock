@@ -52,54 +52,60 @@ static void LCD_writeByte(uint8_t data, uint8_t mode);
 static void LCD_pulseEnable(uint8_t nibble);
 
 static esp_err_t I2C_init(void) {
+  ESP_LOGI(tag, "I2C_init: SDA=%d, SCL=%d", SDA_pin, SCL_pin);
   i2c_config_t conf = {.mode = I2C_MODE_MASTER,
                        .sda_io_num = SDA_pin,
                        .scl_io_num = SCL_pin,
                        .sda_pullup_en = GPIO_PULLUP_ENABLE,
                        .scl_pullup_en = GPIO_PULLUP_ENABLE,
                        .master.clk_speed = 100000};
-  i2c_param_config(I2C_NUM_0, &conf);
-  i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
-  return ESP_OK;
+  esp_err_t err = i2c_param_config(I2C_NUM_0, &conf);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_param_config failed: %d", err);
+  err = i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_driver_install failed: %d", err);
+  return err;
 }
 
 void LCD_init(uint8_t addr, uint8_t dataPin, uint8_t clockPin, uint8_t cols,
               uint8_t rows) {
+  ESP_LOGI(tag, "LCD_init: addr=0x%02X, SDA=%d, SCL=%d, cols=%d, rows=%d", addr, dataPin, clockPin, cols, rows);
   LCD_addr = addr;
   SDA_pin = dataPin;
   SCL_pin = clockPin;
   LCD_cols = cols;
   LCD_rows = rows;
   I2C_init();
-  vTaskDelay(100 / portTICK_RATE_MS); // Initial 40 mSec delay
+  vTaskDelay(500 / portTICK_PERIOD_MS); // Increased initial delay
 
   // Reset the LCD controller
+  ESP_LOGI(tag, "Sending LCD_FUNCTION_RESET sequence");
   LCD_writeNibble(LCD_FUNCTION_RESET,
                   LCD_COMMAND);      // First part of reset sequence
-  vTaskDelay(10 / portTICK_RATE_MS); // 4.1 mS delay (min)
+  vTaskDelay(50 / portTICK_PERIOD_MS); // Increased delay (was 10)
   LCD_writeNibble(LCD_FUNCTION_RESET,
                   LCD_COMMAND); // second part of reset sequence
-  ets_delay_us(200);            // 100 uS delay (min)
+  ets_delay_us(500);            // Increased delay (was 200)
   LCD_writeNibble(LCD_FUNCTION_RESET, LCD_COMMAND);    // Third time's a charm
   LCD_writeNibble(LCD_FUNCTION_SET_4BIT, LCD_COMMAND); // Activate 4-bit mode
-  ets_delay_us(80);                                    // 40 uS delay (min)
+  ets_delay_us(200);                                    // Increased delay (was 80)
 
   // --- Busy flag now available ---
   // Function Set instruction
   LCD_writeByte(LCD_FUNCTION_SET_4BIT,
                 LCD_COMMAND); // Set mode, lines, and font
-  ets_delay_us(80);
+  ets_delay_us(200);
 
   // Clear Display instruction
   LCD_writeByte(LCD_CLEAR, LCD_COMMAND); // clear display RAM
-  vTaskDelay(2 / portTICK_RATE_MS);      // Clearing memory takes a bit longer
+  vTaskDelay(10 / portTICK_PERIOD_MS);      // Increased delay (was 2)
 
   // Entry Mode Set instruction
   LCD_writeByte(LCD_ENTRY_MODE,
                 LCD_COMMAND); // Set desired shift characteristics
-  ets_delay_us(80);
+  ets_delay_us(200);
 
   LCD_writeByte(LCD_DISPLAY_ON, LCD_COMMAND); // Ensure LCD is set to on
+  ESP_LOGI(tag, "LCD init sequence complete");
 }
 
 void LCD_setCursor(uint8_t col, uint8_t row) {
@@ -126,54 +132,68 @@ void LCD_writeStr(char *str) {
 
 void LCD_home(void) {
   LCD_writeByte(LCD_HOME, LCD_COMMAND);
-  vTaskDelay(2 / portTICK_RATE_MS); // This command takes a while to complete
+  vTaskDelay(2 / portTICK_PERIOD_MS); // This command takes a while to complete
 }
 
 void LCD_clearScreen(void) {
   LCD_writeByte(LCD_CLEAR, LCD_COMMAND);
-  vTaskDelay(2 / portTICK_RATE_MS); // This command takes a while to complete
+  vTaskDelay(2 / portTICK_PERIOD_MS); // This command takes a while to complete
 }
 
 static void LCD_writeNibble(uint8_t nibble, uint8_t mode) {
   uint8_t data = (nibble & 0xF0) | mode | LCD_BACKLIGHT;
+  ESP_LOGI(tag, "LCD_writeNibble: nibble=0x%02X mode=0x%02X data=0x%02X", nibble, mode, data);
   i2c_cmd_handle_t cmd = i2c_cmd_link_create();
-  ESP_ERROR_CHECK(i2c_master_start(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1));
-  ESP_ERROR_CHECK(i2c_master_write_byte(cmd, data, 1));
-  ESP_ERROR_CHECK(i2c_master_stop(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS));
+  esp_err_t err;
+  err = i2c_master_start(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_master_start failed: %d", err);
+  err = i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_master_write_byte (addr) failed: %d", err);
+  err = i2c_master_write_byte(cmd, data, 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_master_write_byte (data) failed: %d", err);
+  err = i2c_master_stop(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_master_stop failed: %d", err);
+  err = i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS);
+  if (err != ESP_OK) ESP_LOGE(tag, "i2c_master_cmd_begin failed: %d", err);
   i2c_cmd_link_delete(cmd);
 
   LCD_pulseEnable(data); // Clock data into LCD
 }
 
 static void LCD_writeByte(uint8_t data, uint8_t mode) {
+  ESP_LOGI(tag, "LCD_writeByte: data=0x%02X mode=0x%02X", data, mode);
   LCD_writeNibble(data & 0xF0, mode);
   LCD_writeNibble((data << 4) & 0xF0, mode);
 }
 
 static void LCD_pulseEnable(uint8_t data) {
+  ESP_LOGI(tag, "LCD_pulseEnable: data=0x%02X", data);
   i2c_cmd_handle_t cmd = i2c_cmd_link_create();
-  ESP_ERROR_CHECK(i2c_master_start(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1));
-  ESP_ERROR_CHECK(i2c_master_write_byte(cmd, data | LCD_ENABLE, 1));
-  ESP_ERROR_CHECK(i2c_master_stop(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS));
+  esp_err_t err;
+  err = i2c_master_start(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse: i2c_master_start failed: %d", err);
+  err = i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse: i2c_master_write_byte (addr) failed: %d", err);
+  err = i2c_master_write_byte(cmd, data | LCD_ENABLE, 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse: i2c_master_write_byte (data|EN) failed: %d", err);
+  err = i2c_master_stop(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse: i2c_master_stop failed: %d", err);
+  err = i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse: i2c_master_cmd_begin failed: %d", err);
   i2c_cmd_link_delete(cmd);
-  ets_delay_us(1);
+  ets_delay_us(10); // Increased delay (was 1)
 
   cmd = i2c_cmd_link_create();
-  ESP_ERROR_CHECK(i2c_master_start(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1));
-  ESP_ERROR_CHECK(i2c_master_write_byte(cmd, (data & ~LCD_ENABLE), 1));
-  ESP_ERROR_CHECK(i2c_master_stop(cmd));
-  ESP_ERROR_CHECK(
-      i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS));
+  err = i2c_master_start(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse2: i2c_master_start failed: %d", err);
+  err = i2c_master_write_byte(cmd, (LCD_addr << 1) | I2C_MASTER_WRITE, 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse2: i2c_master_write_byte (addr) failed: %d", err);
+  err = i2c_master_write_byte(cmd, (data & ~LCD_ENABLE), 1);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse2: i2c_master_write_byte (data&~EN) failed: %d", err);
+  err = i2c_master_stop(cmd);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse2: i2c_master_stop failed: %d", err);
+  err = i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS);
+  if (err != ESP_OK) ESP_LOGE(tag, "pulse2: i2c_master_cmd_begin failed: %d", err);
   i2c_cmd_link_delete(cmd);
-  ets_delay_us(500);
+  ets_delay_us(2000); // Increased delay (was 500)
 }

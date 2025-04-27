@@ -35,7 +35,7 @@ void LCD_DemoTask(void *param) {
     LCD_setCursor(10, 1);
     LCD_writeStr("Time: ");
     for (int i = 10; i >= 0; i--) {
-      LCD_setCursor(15, 1);
+      LCD_setCursor(14, 1);
       sprintf(txtBuf, "%02d", i);
       printf("%s\n", txtBuf);
       LCD_writeStr(txtBuf);
