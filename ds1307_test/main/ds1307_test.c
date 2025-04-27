@@ -28,8 +28,8 @@ void app_main(void)
     // Set initial time to current time: April 27, 2025 01:02:28
     struct tm time = {
         .tm_sec = 00,
-        .tm_min = 6,
-        .tm_hour = 1,
+        .tm_min = 12,
+        .tm_hour = 19,
         .tm_mday = 27,
         .tm_mon = 3,   // 0-based, so 3 = April
         .tm_year = 137, // years since 1900 (2025 - 1900)

@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "ds1307_test",
-    "project_version":    "8cb6fd9-dirty",
+    "project_version":    "63ebd6f-dirty",
     "project_path":       "/home/lord-daniel/Code/Counter-Clock/ds1307_test",
     "idf_path":           "/home/lord-daniel/esp/esp-idf",
     "build_dir":          "/home/lord-daniel/Code/Counter-Clock/ds1307_test/build",

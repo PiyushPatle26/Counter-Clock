@@ -215,3 +215,5 @@
 1814	2075	1745756753474432134	/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/bootloader/.bin_timestamp	c77b1b139a3f6ff
 2075	2133	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	9aeffea309f2d3ef
 2075	2133	0	/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	9aeffea309f2d3ef
+3	105	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	9aeffea309f2d3ef
+3	105	0	/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	9aeffea309f2d3ef
