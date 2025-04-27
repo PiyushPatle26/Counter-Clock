@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "ds1307_test",
-    "project_version":    "2ca3b85-dirty",
+    "project_version":    "8cb6fd9-dirty",
     "project_path":       "/home/lord-daniel/Code/Counter-Clock/ds1307_test",
     "idf_path":           "/home/lord-daniel/esp/esp-idf",
     "build_dir":          "/home/lord-daniel/Code/Counter-Clock/ds1307_test/build",
@@ -130,8 +130,8 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "/home/lord-daniel/Code/Counter-Clock/ds1307_test/build/esp-idf/components/libcomponents.a",
-            "sources": [ "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-ds1307/main/ds1307.c", "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-ds1307/main/i2cdev.c", "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-pca9685/src/pca9685.c" ],
-            "include_dirs": [ "esp-idf-ds1307/main", "esp-idf-pca9685/src", "esp-idf-pca9685/include" ]
+            "sources": [ "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-ds1307/main/ds1307.c", "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-ds1307/main/i2cdev.c", "/home/lord-daniel/Code/Counter-Clock/components/esp-idf-pca9685/src/pca9685.c", "/home/lord-daniel/Code/Counter-Clock/components/HD44780/HD44780.c" ],
+            "include_dirs": [ "esp-idf-ds1307/main", "esp-idf-pca9685/src", "esp-idf-pca9685/include", "HD44780/include" ]
         },
         "console": {
             "alias": "idf::console",
@@ -2089,7 +2089,7 @@
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "include_dirs": [ "esp-idf-ds1307/main", "esp-idf-pca9685/src", "esp-idf-pca9685/include" ]
+            "include_dirs": [ "esp-idf-ds1307/main", "esp-idf-pca9685/src", "esp-idf-pca9685/include", "HD44780/include" ]
         }
     },
     "debug_prefix_map_gdbinit": ""
