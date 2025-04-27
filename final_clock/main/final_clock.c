@@ -1,16 +1,27 @@
+
 #include <stdio.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <esp_log.h>
 #include <esp_err.h>
 #include <time.h>
+#include <string.h>
 #include "ds1307.h"
 #include "pca9685.h"
+#include "HD44780.h"
+#include "freertos/portmacro.h"
+#include "sdkconfig.h"
+#include <driver/i2c.h>
 
 // I2C Configuration
 #define SDA_GPIO 21
 #define SCL_GPIO 22
 #define I2C_PORT I2C_NUM_0
+
+// LCD Configuration
+#define LCD_ADDR 0x27  // Common I2C address for PCF8574
+#define LCD_COLS 16
+#define LCD_ROWS 2
 
 // PCA9685 Addresses
 #define PCA1_ADDR 0x40  // First controller (digits 1-2)
@@ -24,6 +35,12 @@
 
 static const char *TAG = "final_clock";
 static i2c_dev_t dev;
+
+// Day names
+const char *day_names[7] = {
+    "Sunday", "Monday", "Tuesday", 
+    "Wednesday", "Thursday", "Friday", "Saturday"
+};
 
 // 7-segment patterns (common cathode)
 const uint8_t digit_patterns[10] = {
@@ -48,6 +65,29 @@ void set_digit(pca9685_dev_t *pca, const uint8_t segments[7], uint8_t digit,
     }
 }
 
+void clock_display_task(void *param) {
+    char date_str[16];
+    char day_str[10];
+    
+    while (1) {
+        struct tm time;
+        if (ds1307_get_time(&dev, &time) == ESP_OK) {
+            // Format date and day
+            strftime(date_str, sizeof(date_str), "Date: %d/%m", &time);
+            strncpy(day_str, day_names[time.tm_wday], sizeof(day_str)-1);
+            day_str[sizeof(day_str)-1] = '\0';
+            
+            // Update LCD display
+            LCD_clearScreen();
+            LCD_setCursor(0, 0);
+            LCD_writeStr(date_str);
+            LCD_setCursor(0, 1);
+            LCD_writeStr(day_str);
+        }
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
 void app_main(void) {
     // Configure I2C
     i2c_config_t conf = {
@@ -56,12 +96,19 @@ void app_main(void) {
         .scl_io_num = SCL_GPIO,
         .sda_pullup_en = GPIO_PULLUP_ENABLE,
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = 400000
+        .master.clk_speed = 100000
     };
     ESP_ERROR_CHECK(i2c_param_config(I2C_PORT, &conf));
     ESP_ERROR_CHECK(i2c_driver_install(I2C_PORT, conf.mode, 0, 0, 0));
     ESP_LOGI(TAG, "I2C bus initialized");
     vTaskDelay(500 / portTICK_PERIOD_MS);
+
+    // Initialize LCD
+    ESP_LOGI(TAG, "Initializing LCD...");
+    LCD_init(LCD_ADDR, SDA_GPIO, SCL_GPIO, LCD_COLS, LCD_ROWS);
+    LCD_clearScreen();
+    LCD_writeStr("Clock Starting...");
+    vTaskDelay(100 / portTICK_PERIOD_MS);
 
     // Initialize DS1307 RTC
     ESP_LOGI(TAG, "Initializing DS1307...");
@@ -98,6 +145,9 @@ void app_main(void) {
     const uint8_t digit3_segments[7] = DIGIT3_SEGMENTS;
     const uint8_t digit4_segments[7] = DIGIT4_SEGMENTS;
 
+    // Create clock display task
+    xTaskCreate(&clock_display_task, "Clock Display", 2048, NULL, 5, NULL);
+
     while (1) {
         struct tm time;
         if (ds1307_get_time(&dev, &time) == ESP_OK) {
@@ -118,7 +168,6 @@ void app_main(void) {
             ESP_LOGE(TAG, "Failed to read time from DS1307");
         }
         
-        // Update display every second
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
