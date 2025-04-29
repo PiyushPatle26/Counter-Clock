@@ -136,7 +136,7 @@ void app_main(void) {
     
     vTaskDelay(500 / portTICK_PERIOD_MS);
 
-    const uint16_t pulse_0deg = 500;  // 0 degrees position
+    const uint16_t pulse_0deg = 660;  // 0 degrees posiidf.tion
     const uint16_t pulse_90deg = 1500; // 90 degrees position
     
     // Segment mappings for each digit

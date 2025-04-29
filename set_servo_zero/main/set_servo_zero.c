@@ -47,7 +47,7 @@ void app_main(void)
     vTaskDelay(500 / portTICK_PERIOD_MS);
 
     // Set all servos to 0 degrees (500µs pulse)
-    const uint16_t pulse_0deg = 500;
+    const uint16_t pulse_0deg = 670;
     const uint16_t pulse_90deg = 1500;
 
     ESP_LOGI(TAG, "Resetting all 32 servos to 0 degrees");
@@ -61,9 +61,19 @@ void app_main(void)
     for (int ch = 0; ch < SERVOS_PER_PCA; ch++) {
         pca9685_set_servo_pulse(&pca2, ch, pulse_0deg);
     }
+    vTaskDelay(5000 / portTICK_PERIOD_MS);
 
-    ESP_LOGI(TAG, "All 32 servos reset to 0 degrees position");
-    while (1) {
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    for (int ch = 0; ch < SERVOS_PER_PCA; ch++) {
+        pca9685_set_servo_pulse(&pca1, ch, pulse_90deg);
     }
+    
+    // Reset second PCA (channels 16-31)
+    for (int ch = 0; ch < SERVOS_PER_PCA; ch++) {
+        pca9685_set_servo_pulse(&pca2, ch, pulse_90deg);
+    }
+
+    ESP_LOGI(TAG, "All 32 servos reset to 0 to 90 deg successfully");
+    // while (1) {
+    //     vTaskDelay(1000 / portTICK_PERIOD_MS);
+    // }
 }
