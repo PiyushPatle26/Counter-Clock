@@ -41,7 +41,7 @@ The system uses two I2C devices:
 ## Installation
 ```bash
 # Clone this repository
-git clone https://github.com/PiyushPatle26/Counter-Clock.git
+git clone --recursive https://github.com/PiyushPatle26/Counter-Clock.git
 cd Counter-Clock
 
 # Build and flash
