@@ -53,8 +53,8 @@ idf.py -p /dev/ttyUSB0 flash monitor
 - Adjust `pulse_0deg` and `pulse_90deg` in `final_clock.c` for your servo calibration
 - Set proper I2C addresses in config.h
 
-## Technical Details
+## Components Used
 - ESP32 microcontroller
-- 32 servo motors (8 per digit)
+- 28 servo motors (7 per digit)
 - 2x PCA9685 PWM controllers
 - DS1307 real-time clock
