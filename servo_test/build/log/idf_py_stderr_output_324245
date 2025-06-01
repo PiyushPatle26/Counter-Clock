@@ -1,8 +1,0 @@
-CMake Error at /home/lord-daniel/esp/esp-idf/tools/cmake/project.cmake:406 (message):
-  Directory specified in EXTRA_COMPONENT_DIRS doesn't exist:
-  /home/lord-daniel/Code/Counter-Clock/servo_test/components
-Call Stack (most recent call first):
-  /home/lord-daniel/esp/esp-idf/tools/cmake/project.cmake:490 (__project_init)
-  CMakeLists.txt:9 (project)
-
-
