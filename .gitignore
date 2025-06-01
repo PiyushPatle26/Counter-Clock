@@ -1,2 +1,9 @@
 build
 .cache
+# Ignore all build directories recursively
+**/build/
+
+# Ignore common build artifacts
+**/*.elf
+**/*.bin
+**/*.map
