@@ -1,4 +1,0 @@
--- IDF_TARGET is not set, guessed 'esp32' from sdkconfig '/home/lord-daniel/Code/Counter-Clock/servo_test/sdkconfig'
--- Found Git: /usr/bin/git (found version "2.34.1") 
--- Configuring incomplete, errors occurred!
-See also "/home/lord-daniel/Code/Counter-Clock/servo_test/build/CMakeFiles/CMakeOutput.log".
